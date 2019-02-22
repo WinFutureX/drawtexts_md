@@ -117,10 +117,6 @@ cpufault:
 ; this is where the fun begins
 startup:
 		move.w	#$2700, sr					; disable ints
-		tst.l	$A10008						; test port A & B control registers
-		bne.s	initz80
-		tst.l	$A1000C						; test port C control register
-		bne.s	initz80						; was it a soft reset?
 		move.b	$A10001, d0					; get HW ver
 		andi.b	#$0F, d0					; compare to rev 0
 		beq.s	initz80						; non-TMSS systems only, otherwise...
@@ -345,21 +341,28 @@ printstr9:
 printstr10:
 		lea	string10, a2
 		move.w	#0, d0						; x-coord
-		move.w	#16, d1						; y-coord
+		move.w	#17, d1						; y-coord
 		move.w	#$0000, d2					; palette flag
 		bsr.w	drawstr
 
 printstr11:
 		lea	string11, a2
-		move.w	#4, d0						; x-coord
-		move.w	#17, d1						; y-coord
+		move.w	#0, d0						; x-coord
+		move.w	#18, d1						; y-coord
 		move.w	#$0000, d2					; palette flag
 		bsr.w	drawstr
 
 printstr12:
 		lea	string12, a2
+		move.w	#4, d0						; x-coord
+		move.w	#19, d1						; y-coord
+		move.w	#$0000, d2					; palette flag
+		bsr.w	drawstr
+
+printstr13:
+		lea	string13, a2
 		move.w	#0, d0						; x-coord
-		move.w	#18, d1						; y-coord
+		move.w	#20, d1						; y-coord
 		move.w	#$0000, d2					; palette flag
 		bsr.w	drawstr
 
@@ -528,15 +531,17 @@ string6:	dc.b	"*ahegao* AHHHHHH!! I'm cumming~", 0			; why do i even do this
 
 string7:	dc.b	"what the fuck, man?", 0
 
-string8:	dc.b	"#include <stdio.h>", 0
+string8:	dc.b	"========================================", 0
 
-string9:	dc.b	"int main()", 0
+string9:	dc.b	"#include <stdio.h>", 0
 
-string10:	dc.b	"{", 0
+string10:	dc.b	"int main()", 0
 
-string11:	dc.b	"printf (""C in assembly???\n"")",0
+string11:	dc.b	"{", 0
 
-string12:	dc.b	"}", 0
+string12:	dc.b	"printf (""C in assembly???\n"")",0
+
+string13:	dc.b	"}", 0
 
 ; end of rom
 romend:
