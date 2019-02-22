@@ -34,8 +34,8 @@ vectors:
 		dc.l	cpufault					;  7: trapv instruction
 		dc.l	cpufault					;  8: privilege violation
 		dc.l	cpufault					;  9: trace
-		dc.l	cpufault					; 10: line A trap
-		dc.l	cpufault					; 11: line F trap
+		dc.l	cpufault					; 10: line A emulator
+		dc.l	cpufault					; 11: line F emulator
 		dc.l	cpufault					; 12: unassigned, reserved
 		dc.l	cpufault					; 13: unassigned, reserved
 		dc.l	cpufault					; 14: format error (68010 and up)
